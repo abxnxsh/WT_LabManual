@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Your Own Pizza</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  form {
+    width: 300px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  label {
+    display: block;
+    margin-bottom: 5px;
+  }
+</style>
+</head>
+<body>
+  <form id="pizzaForm">
+    <h2>Customize Pizza</h2>
+    
+    <label for="size">Select Size:</label>
+    <select id="size" name="size">
+      <option value="small">Small</option>
+      <option value="medium">Medium</option>
+      <option value="large">Large</option>
+    </select>
+    
+    <label>Choose Toppings:</label>
+    <input type="checkbox" id="pepperoni" name="toppings" value="pepperoni">
+    <label for="pepperoni">Pepperoni</label>
+    
+    <input type="checkbox" id="mushrooms" name="toppings" value="mushrooms">
+    <label for="mushrooms">Mushrooms</label>
+    
+    <input type="checkbox" id="olives" name="toppings" value="olives">
+    <label for="olives">Olives</label>
+
+    <label for="crust">Select Crust:</label>
+    <input type="radio" id="thin" name="crust" value="thin">
+    <label for="thin">Thin Crust</label>
+    
+    <input type="radio" id="thick" name="crust" value="thick">
+    <label for="thick">Thick Crust</label>
+
+    <button type="submit">Order Pizza</button>
+  </form>
+
+  <script>
+    document.getElementById("pizzaForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const size = document.getElementById("size").value;
+      const selectedToppings = document.querySelectorAll('input[name="toppings"]:checked');
+      const crust = document.querySelector('input[name="crust"]:checked');
+
+      if (selectedToppings.length === 0 || !crust) {
+        alert("Please select at least one topping and crust.");
+        return;
+      }
+
+      let toppings = [];
+      selectedToppings.forEach(topping => {
+        toppings.push(topping.value);
+      });
+
+      alert(`Your ${size} pizza with ${toppings.join(", ")} and ${crust.value} crust is on the way!`);
+    });
+  </script>
+</body>
+</html>
